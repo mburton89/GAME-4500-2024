@@ -27,5 +27,6 @@ public class Cannon : MonoBehaviour
     {
         GameObject newProjectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, transform.rotation);
         newProjectile.GetComponent<Rigidbody>().AddForce(projectileSpawnPoint.forward * launchSpeed);
+        Destroy(newProjectile, 5);
     }
 }
