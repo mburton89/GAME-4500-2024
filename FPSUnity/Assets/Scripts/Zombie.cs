@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class Zombie : MonoBehaviour
 {
-    public Transform target;
+    Transform target;
     NavMeshAgent agent;
 
     public float walkingSpeed;
@@ -21,6 +21,8 @@ public class Zombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        target = FindFirstObjectByType<FPSController>().transform;
+
         agent = GetComponent<NavMeshAgent>();
         currentHealth = maxHealth;
     }
@@ -46,6 +48,7 @@ public class Zombie : MonoBehaviour
         if (currentHealth <= 0)
         {
             Instantiate(gutsPrefab, transform.position, Quaternion.identity, null);
+            ZombieSpawner.Instance.CountZombies();
             Destroy(gameObject);
         }
     }

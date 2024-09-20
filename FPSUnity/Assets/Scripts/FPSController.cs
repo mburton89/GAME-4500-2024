@@ -21,6 +21,14 @@ public class FPSController : MonoBehaviour
         characterController = GetComponent<CharacterController>();
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.GetComponent<Zombie>())
+        {
+            GameManager.Instance.GameOver();
+        }
+    }
+
     private void Update()
     {
         // Mouse Look
