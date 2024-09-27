@@ -7,6 +7,7 @@ public class ZombieSpawner : MonoBehaviour
     public static ZombieSpawner Instance;
 
     public GameObject zombiePrefab;
+    public GameObject bossZombie;
     public List<Transform> spawnPoints;
 
     int wave;
@@ -33,7 +34,16 @@ public class ZombieSpawner : MonoBehaviour
         for (int i = 0; i < wave; i++)
         { 
             int rand = Random.Range(0, spawnPoints.Count);
-            Instantiate(zombiePrefab, spawnPoints[rand].position, transform.rotation, transform);
+
+            int rand2 = Random.Range(0, 3);
+            if (rand2 == 0)
+            { 
+                Instantiate(bossZombie, spawnPoints[rand].position, transform.rotation, transform);
+            }
+            else
+            {
+                Instantiate(zombiePrefab, spawnPoints[rand].position, transform.rotation, transform);
+            }
         }
 
         HUD.Instance.UpdateWaveUI(wave);
