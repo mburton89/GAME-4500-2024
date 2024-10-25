@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class FPSController : MonoBehaviour
 {
+    public static FPSController Instance;
+
+
     public float moveSpeed = 5.0f;
     public float mouseSensitivity = 2.0f;
     public float jumpForce = 5.0f;
     public Transform playerCamera;
-
     private CharacterController characterController;
     private float verticalRotation = 0;
     private float verticalVelocity = 0;
 
+    private void Awake()
+    {
+        Instance = this;
+    }
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -27,6 +34,8 @@ public class FPSController : MonoBehaviour
         {
             GameManager.Instance.GameOver();
         }
+
+        
     }
 
     private void Update()
@@ -61,5 +70,7 @@ public class FPSController : MonoBehaviour
         }
 
         characterController.Move(movement * Time.deltaTime);
+
+
     }
 }
